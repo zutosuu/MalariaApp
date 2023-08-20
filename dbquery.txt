@@ -1,0 +1,48 @@
+/*Crear base de datos*/
+create database db_app_malaria;
+
+/*Levantar base de datos*/
+use db_app_malaria;
+
+/*Crear tablas*/
+CREATE TABLE tb_users(
+    user_id INTEGER PRIMARY KEY NULL AUTO_INCREMENT,
+    user_gmail VARCHAR(255),
+    user_password VARCHAR(255),
+    user_name VARCHAR(255),
+    user_age INTEGER,
+    user_weight INTEGER,
+    user_height INTEGER
+);
+
+CREATE TABLE tb_disease_exposure (
+    exposure_id INTEGER PRIMARY KEY NULL AUTO_INCREMENT,
+    user_id INTEGER,
+    place_name VARCHAR(255),
+    exposure_date DATE,
+    FOREIGN KEY (user_id) REFERENCES tb_users(user_id)
+);
+
+CREATE TABLE tb_symptom_record (
+    record_id INTEGER PRIMARY KEY NULL AUTO_INCREMENT,
+    symptom_name VARCHAR(255),
+    user_id INTEGER,
+    symptom_description	VARCHAR(255),
+    symptom_intensity VARCHAR(255),
+    symptom_date DATE,
+    FOREIGN KEY (user_id) REFERENCES tb_users(user_id)
+);
+
+CREATE TABLE tb_chat_messages (
+    message_id INTEGER PRIMARY KEY NULL AUTO_INCREMENT,
+    message_content VARCHAR(1000),
+    message_user INTEGER,
+    message_date DATE,
+    is_chatter TINYINT(1) NOT NULL,
+    FOREIGN KEY (message_user) REFERENCES tb_users(user_id)
+);
+
+/*Insertar datos*/
+INSERT INTO tb_users VALUES(NULL, 'fallasmoraless@gmail.com', '12345678','Steven Morales', 18, 53, 173);
+INSERT INTO tb_disease_exposure VALUES(NULL, 1, 'Guanacaste', '2023-7-16');
+INSERT INTO tb_symptom_record VALUES(NULL, 'Dolor de cabeza', 1, '2023-7-16', NULL, 'Alta');
