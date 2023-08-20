@@ -38,6 +38,6 @@ include("../../templates/header.php");
 </main>
 </section>
 
-<?p
+<?
 include("../../templates/footer.php");
 ?>

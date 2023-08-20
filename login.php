@@ -1,3 +1,42 @@
+<?php
+session_start();
+include("app/bd.php");
+if ($_POST) {
+  $gmail = (isset($_POST['user_gmail'])) ? $_POST['user_gmail'] : "";
+  $password = (isset($_POST['user_password'])) ? $_POST['user_password'] : "";
+
+  $sentencia = $conexion->prepare("SELECT *, count(*) as n_users 
+    FROM tb_users WHERE user_gmail=:gmail");
+  $sentencia->bindParam(":gmail", $gmail);
+  $sentencia->execute();
+  $lista_usuarios = $sentencia->fetch(PDO::FETCH_LAZY);
+
+  if ($lista_usuarios['n_users'] > 0) {
+    $sentencia = $conexion->prepare("SELECT *, count(*) as n_users 
+      FROM tb_users WHERE user_gmail=:gmail AND user_password=:password");
+
+    $sentencia->bindParam(":gmail", $gmail);
+    $sentencia->bindParam(":password", $password);
+    //print_r($sentencia);
+    $sentencia->execute();
+    $lista_usuarios = $sentencia->fetch(PDO::FETCH_LAZY);
+    if ($lista_usuarios['n_users'] > 0) {
+      $_SESSION['user_id'] = $lista_usuarios['user_id'];
+      $_SESSION['user_name'] = $lista_usuarios['user_name'];
+      header("LOCATION:./app");
+    } else {
+      echo '<script>
+            mostrarPopup();
+        </script>';
+    }
+  } else {
+    echo '<script>
+            mostrarPopup();
+        </script>';
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +58,7 @@
 </head>
 
 <body id="page-top">
-<?php include("templates/nav.php");?>
+  <?php include("templates/nav.php"); ?>
   <section>
     <div class="container">
       <div class="row">
@@ -53,7 +92,7 @@
             </div>
             <br>
             <?php
-            if ($_SESSION) {
+            if (isset($_SESSION['user_id'])) {
               echo '<a class="btn btn-primary b" href="logout.php" role="button">Cerrar Sesión</a> <br>';
             }
             ?>
@@ -75,11 +114,11 @@
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-    </script>
+  </script>
   <script>
     // Función para mostrar el pop-up
     function mostrarPopup() {
@@ -96,40 +135,3 @@
 </body>
 
 </html>
-
-<?php
-if ($_POST) {
-  $gmail = (isset($_POST['user_gmail'])) ? $_POST['user_gmail'] : "";
-  $password = (isset($_POST['user_password'])) ? $_POST['user_password'] : "";
-
-  $sentencia = $conexion->prepare("SELECT *, count(*) as n_users 
-    FROM tb_users WHERE user_gmail=:gmail");
-  $sentencia->bindParam(":gmail", $gmail);
-  $sentencia->execute();
-  $lista_usuarios = $sentencia->fetch(PDO::FETCH_LAZY);
-
-  if ($lista_usuarios['n_users'] > 0) {
-    $sentencia = $conexion->prepare("SELECT *, count(*) as n_users 
-      FROM tb_users WHERE user_gmail=:gmail AND user_password=:password");
-
-    $sentencia->bindParam(":gmail", $gmail);
-    $sentencia->bindParam(":password", $password);
-    //print_r($sentencia);
-    $sentencia->execute();
-    $lista_usuarios = $sentencia->fetch(PDO::FETCH_LAZY);
-    if ($lista_usuarios['n_users'] > 0) {
-      $_SESSION['user_id'] = $lista_usuarios['user_id'];
-      $_SESSION['user_name'] = $lista_usuarios['user_name'];
-      header("LOCATION:./app");
-    } else {
-      echo '<script>
-            mostrarPopup();
-        </script>';
-    }
-  }else{
-    echo '<script>
-            mostrarPopup();
-        </script>';
-  }
-}
-?>

@@ -1,6 +1,3 @@
-<?php
-session_start();
-include("app/bd.php"); ?>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg fixed-top" id="loginNav">
         <div class="container">
