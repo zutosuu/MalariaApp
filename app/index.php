@@ -33,8 +33,9 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./../css/bootstrap.css">
     <link href="./../css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body id="page-top">
@@ -57,8 +58,8 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             <li class="nav-item"><a class="nav-link" href="/malariaapp#portfolio">Malaria</a></li>
                         </b>
                         <b>
-                        <li class="nav-item"><a class="nav-link" href="./../mapa.php">Mapa</a></li>
-                    </b>
+                            <li class="nav-item"><a class="nav-link" href="./../mapa.php">Mapa</a></li>
+                        </b>
                         <b>
                             <li class="nav-item"><a class="nav-link" href="/malariaapp#team">Equipo</a></li>
                         </b>
@@ -156,7 +157,8 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
             <h1><a class="navbar-brand" href="./login.php">Síntomas</a></h1>
             <div class="card">
                 <div class="card-header">
-                    <a name="" id="" class="btn btn-primary" href="sections/symptoms/crear.php" role="button">Registrar síntoma</a>
+                    <a name="" id="" class="btn btn-primary" href="sections/symptoms/crear.php" role="button">Registrar
+                        síntoma</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive-sm">
