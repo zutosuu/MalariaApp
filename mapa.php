@@ -28,7 +28,6 @@ include("app/bd.php");
     </select>
     <div id="total-cases">Casos Reportados en Agosto: 401</diV>
     <div id="coordinates">Latitud: 0.000000<br>Longitud: 0.000000</div>
-
     <script>
         // Inicializar el mapa centrado en Costa Rica
         var mymap = L.map('map-navegator').setView([9.7489, -83.7534], 8);
@@ -114,6 +113,7 @@ include("app/bd.php");
         // Inicialmente, carga los marcadores con los casos del año 2020
         actualizarMarcadores();
     </script>
+    
 </body>
 
 </html>

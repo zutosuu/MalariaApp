@@ -1,3 +1,11 @@
+/* Define el estilo del footer rojo */
+footer {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    text-align: center; 
+}
+
 /* Estilos para los enlaces de navegación */
 .nav-link {
     color: white;
@@ -71,7 +79,7 @@
 /* Estilos para el contenedor del mapa */
 #map-navegator {
     width: 100vw;
-    height: 92vh;
+    height: 90vh;
     background-color: lightblue;
 }
 
@@ -110,3 +118,5 @@
     border-radius: 5px;
     z-index: 1000;
 }
+
+

@@ -439,6 +439,10 @@ include("app/bd.php");
             </div>
         </div>
     </section>
+    <footer>
+        <p>2023, Costa Rica, Steven Morales Fallas </p>
+        <p>+506 61304830 / fallasmoraless@gmail.com</p>
+    </footer>
 
     <!--BOOTSTRAP IMPORT-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
