@@ -79,6 +79,15 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <div class="chat-header">Chatbot Malaria App</div>
                 <div class="chat-messages">
                     <?php
+                    //Mensaje de inicio
+                    $sentencia = $conexion->prepare("SELECT count(*) as n_messages FROM tb_chat_messages WHERE message_user = :user");
+                    $sentencia->bindParam(":user", $user_id);
+                    $sentencia->execute();
+                    $messages = $sentencia->fetchAll(PDO::FETCH_OBJ);
+                    if ($messages){
+                        echo '<div class="message bot">Hola, me llamo Mara. ¿En qué puedo ayudarte?</div><br>';
+                    }
+
                     $bot_responses = [
                         "Hola" => "¡Hola! ¿En qué puedo ayudarte?",
                         "Me gustaría agregar un síntoma" => "Claro, estoy para ayudarte. Porfavor ingresa la información solicitada y lo registraré en mis datos.",
@@ -120,7 +129,7 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             header("LOCATION: sections/symptoms/crear.php");
                         }
                     }
-                    // Leer mensajes
+                    // Publicar mensajes
                     $sentencia = $conexion->prepare("SELECT * FROM tb_chat_messages WHERE message_user = :user");
                     $sentencia->bindParam(":user", $user_id);
                     $sentencia->execute();

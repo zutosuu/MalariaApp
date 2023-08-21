@@ -16,10 +16,10 @@ include("app/bd.php");
     <?php include("templates/nav.php"); ?>
     <!-- Contenedor del mapa -->
     <br><br>
-    <div id="map"></div>
+    <div id="map-navegator"></div>
     <!-- Información de coordenadas -->
     <select name="año" id="year-select">
-        <option value="2022">2023</option>
+        <option value="2023">2023</option>
         <option value="2022">2022</option>
         <option value="2021">2021</option>
         <option value="2020">2020</option>
@@ -31,7 +31,7 @@ include("app/bd.php");
 
     <script>
         // Inicializar el mapa centrado en Costa Rica
-        var mymap = L.map('map').setView([9.7489, -83.7534], 8);
+        var mymap = L.map('map-navegator').setView([9.7489, -83.7534], 8);
 
         // Agregar una capa de mapas base (OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

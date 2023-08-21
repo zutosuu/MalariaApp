@@ -62,10 +62,10 @@ include("app/bd.php");
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-solid fa-database fa-stack-1x fa-inverse"></i>
+                        <i class="fas fa-solid fa-head-side-virus fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="my-3">Recolección de Información</h4>
-                    <p class="text-muted">Información valiosa para mejorar el tratamiento de la enfermedad.</p>
+                    <h4 class="my-3">Chat Bot</h4>
+                    <p class="text-muted">Interacción con la app y sus funciones por medio de un amigo virtual.</p>
                 </div>
 
                 <div class="col-md-4">
@@ -74,7 +74,7 @@ include("app/bd.php");
                         <i class="fas fa-solid fa-circle-exclamation fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Detección Temprana</h4>
-                    <p class="text-muted">Mediante síntomas se puede detectar la enfermedad de manera temprana.</p>
+                    <p class="text-muted">Detección de la enfermedad de forma temprana mediante el monitoreo de síntomas.</p>
                 </div>
 
                 <div class="col-md-4">
@@ -83,7 +83,7 @@ include("app/bd.php");
                         <i class="fas fa-solid fa-calendar-days fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="my-3">Monitorio de la Salud</h4>
-                    <p class="text-muted">Se lleva un registro del estado de salud a través de los días.</p>
+                    <p class="text-muted">Registro del estado y condición de la salud a través de los días.</p>
                 </div>
             </div>
         </div>
@@ -391,6 +391,15 @@ include("app/bd.php");
             </div>
         </div>
     </div>
+
+    <!-- MAP-->
+    <section class="page-section bg-light" id="map">
+        <div class="map-container">
+            <h1>Malaria en Costa Rica</h1>
+            <h4 style="font-weight: normal;">La incidencia de la malaria en Costa Rica va en aumento</h4>
+            <a class="btn btn-primary btn-xl text-uppercase header-btn" href="./mapa.php">Mapa Malaria en Costa Rica</a>
+        <div>
+    </section>
 
     <!-- TEAM-->
     <section class="page-section bg-light" id="team">
