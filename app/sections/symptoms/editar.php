@@ -54,8 +54,15 @@ include("../../templates/header.php");
                 <form action="" enctype="multipart/form-data" method="post">
                     <div class="mb-3">
                         <label for="symptom_name" class="form-label">Nombre</label>
-                        <input type="text" value="<?php echo $name; ?>" class="form-control" name="symptom_name"
-                            id="symptom_name" aria-describedby="helpId" placeholder="Nombre">
+                        <select name="symptom_name" class="form-select">
+                            <?php
+                            $sintomas = ["Fiebre", "Escalofríos", "Sudoración", "Dolor de cabeza", "Fatiga", "Dolor muscular y articular", "Náuseas y vómitos", "Dolor abdominal", "Anemia", "Confusión mental", " Convulsiones", "Coma"];
+                            foreach ($sintomas as $sintoma) {
+                                $selected = ($name === $sintoma) ? "selected" : "";
+                                echo "<option value=\"$sintoma\" $selected>$sintoma</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="mb-3">
@@ -67,9 +74,15 @@ include("../../templates/header.php");
 
                     <div class="mb-3">
                         <label for="symptom_intensity" class="form-label">Intensidad</label>
-                        <input type="text" value="<?php echo $intensity; ?>" class="form-control"
-                            name="symptom_intensity" id="symptom_intensity" aria-describedby="helpId"
-                            placeholder="Intensidad">
+                        <select name="symptom_intensity" class="form-select">
+                        <?php
+                            $intensidades = ["Muy alta", "Alta", "Intermedia", "Baja", "Muy baja", "Ninguna"];
+                            foreach ($intensidades as $intensidad) {
+                                $selected = ($intensity == $intensidad) ? "selected" : "";
+                                echo "<option value=\"$intensidad\" $selected>$intensidad</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="mb-3">

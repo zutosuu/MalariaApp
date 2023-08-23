@@ -19,6 +19,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./../../../css/bootstrap.css" rel="stylesheet" />
     <link href="./../../../css/styles.css" rel="stylesheet" />
+    <link href="./../../css/style.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -50,7 +51,8 @@
                         </b>
                         <b>
                             <li class="nav-item"><a class="nav-link nav-login" href="./../../../login.php">
-                                    <?= $_SESSION ? $_SESSION['user_name'] : 'Iniciar Sesión' ?>
+                                    <? if (isset($_SESSION['user_name'])) {
+                            echo $_SESSION['user_name']; ?>
                                 </a></li>
                         </b>
                     </ul>

@@ -1,6 +1,6 @@
 <?php
+include("../../templates/header.php");
 include("../../bd.php");
-session_start();
 if($_POST){
     // Recepcionamos los valores del formulario 					
     $nombre=(isset($_POST['symptom_name']))?$_POST['symptom_name']:"";
@@ -22,49 +22,57 @@ if($_POST){
     header("Location:./../../index.php");
 }
 
-include("../../templates/header.php");
+
 ?>
 
 <h1><a class="navbar-brand" href="./login.php">
-    Síntomas
-</a></h1>
+        Síntomas
+    </a></h1>
 <div class="card">
     <div class="card-header">
         Registrar síntomas
     </div>
     <div class="card-body">
         <form action="" enctype="multipart/form-data" method="post">
-        <div class="mb-3">
-          <label for="symptom_name" class="form-label">Nombre</label>
-          <input type="text"
-            class="form-control" name="symptom_name" id="symptom_name" aria-describedby="helpId" placeholder="Nombre">
-        </div>
+            <div class="mb-3">
+                <label for="symptom_name" class="form-label">Nombre</label>
+                <select name="symptom_name" class="form-select">
+                    <?php
+                    $sintomas = ["Fiebre", "Escalofríos", "Sudoración", "Dolor de cabeza", "Fatiga", "Dolor muscular y articular", "Náuseas y vómitos", "Dolor abdominal", "Anemia", "Confusión mental", " Convulsiones", "Coma"];
+                    foreach ($sintomas as $sintoma){
+                        echo "<option value=\"$sintoma\">$sintoma</option>";
+                    }
+                    ?>
+                </select>
+                <div class="mb-3">
+                    <label for="symptom_description" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" name="symptom_description" id="symptom_description"
+                        aria-describedby="helpId" placeholder="Descripción">
+                </div>
 
-        <div class="mb-3">
-          <label for="symptom_description" class="form-label">Descripción</label>
-          <input type="text"
-            class="form-control" name="symptom_description" id="symptom_description" aria-describedby="helpId" placeholder="Descripción">
-        </div>
+                <div class="mb-3">
+                    <label for="symptom_intensity" class="form-label">Intensidad</label>
+                    <select name="symptom_intensity" class="form-select">
+                    <?php
+                        $intensidades = ["Muy alta", "Alta", "Intermedia", "Baja", "Muy baja", "Ninguna"];
+                        foreach ($intensidades as $intensidad) {
+                            echo "<option value=\"$intensidad\" $selected>$intensidad</option>";
+                        }
+                    ?>
+                    </select>
+                </div>
 
-        <div class="mb-3">
-          <label for="symptom_intensity" class="form-label">Intensidad</label>
-          <input type="text"
-            class="form-control" name="symptom_intensity" id="symptom_intensity" aria-describedby="helpId" placeholder="Intensidad">
-        </div>
+                <div class="mb-3">
+                    <label for="symptom_date" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" name="symptom_date" id="symptom_date"
+                        aria-describedby="helpId" placeholder="Fecha">
+                </div>
 
-        <div class="mb-3">
-          <label for="symptom_date" class="form-label">Fecha</label>
-          <input type="date"
-            class="form-control" name="symptom_date" id="symptom_date" aria-describedby="helpId" placeholder="Fecha">
-        </div>
-
-        <button type="submit" class="btn btn-success">Agregar</button>
-        <a name="" id="" class="btn btn-primary" href="./../../index.php" role="button">Cancelar</a>
+                <button type="submit" class="btn btn-success">Agregar</button>
+                <a name="" id="" class="btn btn-primary" href="./../../index.php" role="button">Cancelar</a>
         </form>
     </div>
-    <div class="card-footer text-muted">
-
-    </div>
+</div>
 </div>
 
 <?php

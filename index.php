@@ -396,7 +396,7 @@ include("app/bd.php");
     <section class="page-section bg-light" id="map">
         <div class="map-container">
             <h1>Malaria en Costa Rica</h1>
-            <h4 style="font-weight: normal;">La incidencia de la malaria en Costa Rica va en aumento</h4>
+            <h4 style="font-weight: normal;">Conoce el registro de los datos actualizados y confiables</h4>
             <a class="btn btn-primary btn-xl text-uppercase header-btn" href="./mapa.php">Mapa Malaria en Costa Rica</a>
         <div>
     </section>

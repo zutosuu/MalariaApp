@@ -5,10 +5,29 @@ body {
     padding: 0;
 }
 
-#symptoms-section{
+.form-select{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+select:hover{
+    color: red;
+    font-weight: bold;
+}
+
+
+#symptoms-section {
     margin-top: -15rem;
 }
-#chat-section{
+
+#chat-section {
     margin-top: -5rem;
 }
 
@@ -79,18 +98,24 @@ body {
     cursor: pointer;
 }
 
-.send-button:hover{
+.send-button:hover {
     background-color: rgb(247, 55, 55);
 }
 
 /* Estilo para un botón gris oscuro */
 .dark-gray-button {
-    background-color: #333; /* Color de fondo gris oscuro */
-    color: #fff; /* Color de texto blanco */
-    border: none; /* Sin borde */
-    padding: 10px 10px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambiar el cursor al pasar el ratón */
+    background-color: #333;
+    /* Color de fondo gris oscuro */
+    color: #fff;
+    /* Color de texto blanco */
+    border: none;
+    /* Sin borde */
+    padding: 10px 10px;
+    /* Espaciado interno */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cambiar el cursor al pasar el ratón */
     text-decoration: none;
     text-size-adjust: 1px;
     margin: 2px;
@@ -98,7 +123,8 @@ body {
 
 /* Estilo para el botón cuando se pasa el ratón por encima */
 .dark-gray-button:hover {
-    background-color: #555; /* Color de fondo gris más oscuro */
+    background-color: #555;
+    /* Color de fondo gris más oscuro */
 }
 
 /* Estilo del pop-up */
@@ -112,4 +138,4 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
+}

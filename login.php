@@ -95,8 +95,6 @@ include("app/bd.php"); ?>
         <p>2023, Costa Rica, Steven Morales Fallas </p>
         <p>+506 61304830 / fallasmoraless@gmail.com</p>
     </footer>
-
-
   <!--Popup Programmig-->
   <script>
     // Función para mostrar el pop-up
