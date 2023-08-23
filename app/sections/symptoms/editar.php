@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../../bd.php");
 
 if (isset($_GET['txtID'])) {
@@ -39,67 +40,89 @@ if ($_POST) {
 
     header("Location:./../../index.php");
 }
-include("../../templates/header.php");
 ?>
-<h1><a class="navbar-brand" href="./login.php">
-        Síntomas
-    </a></h1>
-<div class="card">
-    <div class="card-header">
-        Editar síntoma
-    </div>
-    <div class="card-body">
-        <form action="" enctype="multipart/form-data" method="post">
-            <div class="card-body">
-                <form action="" enctype="multipart/form-data" method="post">
-                    <div class="mb-3">
-                        <label for="symptom_name" class="form-label">Nombre</label>
-                        <select name="symptom_name" class="form-select">
-                            <?php
-                            $sintomas = ["Fiebre", "Escalofríos", "Sudoración", "Dolor de cabeza", "Fatiga", "Dolor muscular y articular", "Náuseas y vómitos", "Dolor abdominal", "Anemia", "Confusión mental", " Convulsiones", "Coma"];
-                            foreach ($sintomas as $sintoma) {
-                                $selected = ($name === $sintoma) ? "selected" : "";
-                                echo "<option value=\"$sintoma\" $selected>$sintoma</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
+<!DOCTYPE html>
+<html lang="en">
 
-                    <div class="mb-3">
-                        <label for="symptom_description" class="form-label">Descripción</label>
-                        <input type="text" value="<?php echo $description; ?>" class="form-control"
-                            name="symptom_description" id="symptom_description" aria-describedby="helpId"
-                            placeholder="Descripción">
-                    </div>
+<head>
+    <title>Editar Síntoma</title>
+    <?php include("./../../templates/header.php"); ?>
+</head>
 
-                    <div class="mb-3">
-                        <label for="symptom_intensity" class="form-label">Intensidad</label>
-                        <select name="symptom_intensity" class="form-select">
-                        <?php
-                            $intensidades = ["Muy alta", "Alta", "Intermedia", "Baja", "Muy baja", "Ninguna"];
-                            foreach ($intensidades as $intensidad) {
-                                $selected = ($intensity == $intensidad) ? "selected" : "";
-                                echo "<option value=\"$intensidad\" $selected>$intensidad</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
+<body id="page-top">
+    <header>
+        <!-- Navigation-->
+        <?php include("./../../templates/nav.php"); ?>
+    </header>
+    <section>
+        <main class="container">
+            <h1><a class="navbar-brand" href="./login.php">
+                    Síntomas
+                </a></h1>
+            <div class="card">
+                <div class="card-header">
+                    Editar síntoma
+                </div>
+                <div class="card-body">
+                    <form action="" enctype="multipart/form-data" method="post">
+                        <div class="card-body">
+                            <form action="" enctype="multipart/form-data" method="post">
+                                <div class="mb-3">
+                                    <label for="symptom_name" class="form-label">Nombre</label>
+                                    <select name="symptom_name" class="form-select">
+                                        <?php
+                                        $sintomas = ["Fiebre", "Escalofríos", "Sudoración", "Dolor de cabeza", "Fatiga", "Dolor muscular y articular", "Náuseas y vómitos", "Dolor abdominal", "Anemia", "Confusión mental", " Convulsiones", "Coma"];
+                                        foreach ($sintomas as $sintoma) {
+                                            $selected = ($name === $sintoma) ? "selected" : "";
+                                            echo "<option value=\"$sintoma\" $selected>$sintoma</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
 
-                    <div class="mb-3">
-                        <label for="symptom_date" class="form-label">Fecha</label>
-                        <input type="date" value="<?php echo $date; ?>" class="form-control" name="symptom_date"
-                            id="symptom_date" aria-describedby="helpId" placeholder="Fecha">
-                    </div>
+                                <div class="mb-3">
+                                    <label for="symptom_description" class="form-label">Descripción</label>
+                                    <input type="text" value="<?php echo $description; ?>" class="form-control"
+                                        name="symptom_description" id="symptom_description" aria-describedby="helpId"
+                                        placeholder="Descripción">
+                                </div>
 
-                    <button type="submit" class="btn btn-success">Modificar</button>
-                    <a name="" id="" class="btn btn-primary" href="./../../index.php" role="button">Cancelar</a>
-                </form>
-            </div>
-            <div class="card-footer text-muted">
+                                <div class="mb-3">
+                                    <label for="symptom_intensity" class="form-label">Intensidad</label>
+                                    <select name="symptom_intensity" class="form-select">
+                                        <?php
+                                        $intensidades = ["Muy alta", "Alta", "Intermedia", "Baja", "Muy baja", "Ninguna"];
+                                        foreach ($intensidades as $intensidad) {
+                                            $selected = ($intensity == $intensidad) ? "selected" : "";
+                                            echo "<option value=\"$intensidad\" $selected>$intensidad</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
 
-            </div>
-    </div>
+                                <div class="mb-3">
+                                    <label for="symptom_date" class="form-label">Fecha</label>
+                                    <input type="date" value="<?php echo $date; ?>" class="form-control"
+                                        name="symptom_date" id="symptom_date" aria-describedby="helpId"
+                                        placeholder="Fecha">
+                                </div>
 
-    <?php
-    include("../../templates/footer.php");
-    ?>
+                                <button type="submit" class="btn btn-success">Modificar</button>
+                                <a name="" id="" class="btn btn-primary" href="./../../index.php"
+                                    role="button">Cancelar</a>
+                            </form>
+                        </div>
+                        <div class="card-footer text-muted">
+
+                        </div>
+                </div>
+
+    </section>
+    </main>
+    <footer>
+        <p>2023, Costa Rica, Steven Morales Fallas </p>
+        <p>+506 61304830 / fallasmoraless@gmail.com</p>
+    </footer>
+</body>
+
+</html>
