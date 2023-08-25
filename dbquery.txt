@@ -18,7 +18,11 @@ CREATE TABLE tb_users(
 CREATE TABLE tb_disease_exposure (
     exposure_id INTEGER PRIMARY KEY NULL AUTO_INCREMENT,
     user_id INTEGER,
-    place_name VARCHAR(255),
+    exposere_descrip VARCHAR(300),
+    exposure_province VARCHAR(255),
+    exposure_canton VARCHAR(255),
+    exposure_district VARCHAR(255),
+    exposure_place VARCHAR(255),
     exposure_date DATE,
     FOREIGN KEY (user_id) REFERENCES tb_users(user_id)
 );
@@ -44,5 +48,4 @@ CREATE TABLE tb_chat_messages (
 
 /*Insertar datos*/
 INSERT INTO tb_users VALUES(NULL, 'fallasmoraless@gmail.com', '12345678','Steven Morales', 18, 53, 173);
-INSERT INTO tb_disease_exposure VALUES(NULL, 1, 'Guanacaste', '2023-7-16');
 INSERT INTO tb_symptom_record VALUES(NULL, 'Dolor de cabeza', 1, '2023-7-16', NULL, 'Alta');

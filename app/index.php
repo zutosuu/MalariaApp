@@ -13,11 +13,13 @@ if (isset($_GET['txtID'])) {
     $sentencia->execute();
 }
 
-// Consultar registros de síntomas
-$sentencia = $conexion->prepare("SELECT * FROM tb_symptom_record WHERE user_id = :user_id");
-$sentencia->bindParam(":user_id", $_SESSION['user_id']);
-$sentencia->execute();
-$lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+// Borrar exposición si se proporciona exposureID en la URL
+if (isset($_GET['exposureID'])) {
+    $exposureID = $_GET['exposureID'];
+    $sentencia = $conexion->prepare("DELETE FROM tb_disease_exposure WHERE exposure_id = :id");
+    $sentencia->bindParam(":id", $exposureID);
+    $sentencia->execute();
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +76,7 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
     <main class="container">
+        <!--CHATBOT SECTION-->
         <section id="chat-section">
             <div class="chat-container">
                 <div class="chat-header">Chatbot Malaria App</div>
@@ -162,8 +165,9 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 }
             </script>
         </section>
+        <!--SYMPTOMS SECTION-->
         <section id="symptoms-section">
-            <h1><a class="navbar-brand" href="./login.php">Síntomas</a></h1>
+            <h1>Síntomas</h1>
             <div class="card">
                 <div class="card-header">
                     <a name="" id="" class="btn btn-primary" href="sections/symptoms/crear.php" role="button">Registrar
@@ -182,7 +186,14 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($lista_síntomas as $registro) { ?>
+                                <?php 
+                                // Consultar registros de síntomas
+                                $sentencia = $conexion->prepare("SELECT * FROM tb_symptom_record WHERE user_id = :user_id");
+                                $sentencia->bindParam(":user_id", $_SESSION['user_id']);
+                                $sentencia->execute();
+                                $lista_sintomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+                                
+                                foreach ($lista_sintomas as $registro) { ?>
                                     <tr>
                                         <td>
                                             <?= $registro['record_id'] ?>
@@ -204,6 +215,63 @@ $lista_síntomas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                                 href="sections/symptoms/editar.php?txtID=<?= $registro['record_id'] ?>"
                                                 role="button">Editar</a>
                                             <a class="btn btn-primary" href="index.php?txtID=<?= $registro['record_id'] ?>"
+                                                role="button">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a class="btn btn-success" href="sections/symptoms/analisis.php" role="button">Analizar</a>
+                </div>
+            </div>
+        </section>
+        <!--MALARIA EXPOSURES SECTION-->
+        <section id="malaria-exposures-section">
+            <h1>Exposiciones a Zonas de Riesgo</h1>
+            <div class="card">
+                <div class="card-header">
+                    <a name="" id="" class="btn btn-primary" href="sections/exposures/crear.php" role="button">Registrar
+                        exposición</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive-sm">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Lugar</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                // Consultar registros de síntomas
+                                $sentencia = $conexion->prepare("SELECT * FROM tb_disease_exposure  WHERE user_id = :user_id");
+                                $sentencia->bindParam(":user_id", $_SESSION['user_id']);
+                                $sentencia->execute();
+                                $lista_exposiciones = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+                                
+                                foreach ($lista_exposiciones as $exposicion) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $exposicion['exposure_id'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $exposicion['exposere_descrip'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $exposicion['exposure_place'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $exposicion['exposure_date'] ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success"
+                                                href="sections/exposures/editar.php?exposureID=<?= $exposicion['exposure_id'] ?>"
+                                                role="button">Editar</a>
+                                            <a class="btn btn-primary" href="index.php?exposureID=<?= $exposicion['exposure_id'] ?>"
                                                 role="button">Eliminar</a>
                                         </td>
                                     </tr>
