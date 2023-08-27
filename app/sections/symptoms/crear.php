@@ -27,7 +27,7 @@ if ($_POST) {
 <html lang="en">
 
 <head>
-    <title>Crear Síntoma</title>
+    <title>Registrar Síntoma</title>
     <?php include("./../../templates/header.php"); ?>
 </head>
 
@@ -56,7 +56,7 @@ if ($_POST) {
                                     echo "<option value=\"$sintoma\">$sintoma</option>";
                                 }
                                 ?>
-                            </select>
+                            </select></div>
                             <div class="mb-3">
                                 <label for="symptom_description" class="form-label">Descripción</label>
                                 <input type="text" class="form-control" name="symptom_description"

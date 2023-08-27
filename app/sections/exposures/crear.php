@@ -8,8 +8,8 @@ if ($_POST) {
     $date = (isset($_POST['symptom_date'])) ? $_POST['symptom_date'] : "";
     $description = (isset($_POST['symptom_description'])) ? $_POST['symptom_description'] : "";
     $intensity = (isset($_POST['symptom_intensity'])) ? $_POST['symptom_intensity'] : "";
-    $sentencia = $conexion->prepare("INSERT INTO tb_symptom_record
-    VALUES (NULL, :nombre, :user, :description, :intensity,:date);");
+    $sentencia = $conexion->prepare('INSERT INTO tb_symptom_record
+    VALUES (NULL, :nombre, :user, :description, :intensity,:date);');
 
     $sentencia->bindParam(":nombre", $nombre);
     $sentencia->bindParam(":user", $_SESSION['user_id']);
@@ -22,12 +22,58 @@ if ($_POST) {
     header("Location:./../../index.php");
 }
 
+//Abrir archivos CSV
+$archiv_provincias = '../../../csv/provincias.csv';
+$archiv_cantones = '../../../csv/cantones.csv';
+$archiv_distritos = '../../../csv/distritos.csv';
+
+$gestor_provincias = fopen($archiv_provincias, 'r');
+$gestor_cantones = fopen($archiv_cantones, 'r');
+$gestor_distritos = fopen($archiv_distritos, 'r');
+
+if ($gestor_provincias !== false and $gestor_cantones !== false and $gestor_distritos !== false) {
+    // Aquí almacenaremos los datos del CSV
+    $provincias = array();
+    $cantones = array();
+    $distritos = array();
+    $agregar = false; //Evita que se agregue la primera línea
+
+    while (($fila = fgetcsv($gestor_provincias)) !== false) {
+        if ($agregar) {
+            $provincias[] = $fila; // Agrega la fila actual al array de datos
+        }
+        $agregar = True;
+    }
+
+    $agregar = false; //Evita que se agregue la primera línea
+    while (($fila = fgetcsv($gestor_cantones)) !== false) {
+        if ($agregar) {
+            $cantones[] = $fila; // Agrega la fila actual al array de datos
+        }
+        $agregar = True;
+    }
+
+    $agregar = false; //Evita que se agregue la primera línea
+    while (($fila = fgetcsv($gestor_distritos)) !== false) {
+        if ($agregar) {
+            $distritos[] = $fila; // Agrega la fila actual al array de datos
+        }
+        $agregar = True;
+    }
+
+    fclose($gestor_provincias);
+    fclose($gestor_cantones);
+    fclose($gestor_distritos);
+} else {
+    echo "No se pudo abrir el archivo CSV.";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Crear Síntoma</title>
+    <title>Registrar Exposición</title>
     <?php include("./../../templates/header.php"); ?>
 </head>
 
@@ -39,47 +85,49 @@ if ($_POST) {
     <main class="container">
         <section>
             <h1><a class="navbar-brand" href="./login.php">
-                    Síntomas
+                    Exposiciones a Zonas de Riesgo
                 </a></h1>
             <div class="card">
                 <div class="card-header">
-                    Registrar síntomas
+                    Registrar exposición
                 </div>
                 <div class="card-body">
                     <form action="" enctype="multipart/form-data" method="post">
-                        <div class="mb-3">
-                            <label for="symptom_name" class="form-label">Nombre</label>
-                            <select name="symptom_name" class="form-select">
+                            <div class="mb-3">
+                                <label for="exposure_descrip" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" name="exposure_descrip" id="exposure_descrip"
+                                    aria-describedby="helpId" placeholder="Descripción de la exposición">
+                            </div>
+                            
+                            <div class="mb-3">
+                            <label for="exposure_province" class="form-label">Provincia</label>
+                            <select name="exposure_province" class="form-select">
                                 <?php
-                                $sintomas = ["Fiebre", "Escalofríos", "Sudoración", "Dolor de cabeza", "Fatiga", "Dolor muscular y articular", "Náuseas y vómitos", "Dolor abdominal", "Anemia", "Confusión mental", " Convulsiones", "Coma"];
-                                foreach ($sintomas as $sintoma) {
-                                    echo "<option value=\"$sintoma\">$sintoma</option>";
+                                foreach ($provincias as $provincia) {
+                                    echo "<option value=\"$provincia[1]\">$provincia[1]</option>";
                                 }
                                 ?>
-                            </select>
-                            <div class="mb-3">
-                                <label for="symptom_description" class="form-label">Descripción</label>
-                                <input type="text" class="form-control" name="symptom_description"
-                                    id="symptom_description" aria-describedby="helpId" placeholder="Descripción">
-                            </div>
+                            </select></div>
 
                             <div class="mb-3">
-                                <label for="symptom_intensity" class="form-label">Intensidad</label>
-                                <select name="symptom_intensity" class="form-select">
-                                    <?php
-                                    $intensidades = ["Muy alta", "Alta", "Intermedia", "Baja", "Muy baja", "Ninguna"];
-                                    foreach ($intensidades as $intensidad) {
-                                        echo "<option value=\"$intensidad\" $selected>$intensidad</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                            <label for="exposure_canton" class="form-label">Cantones</label>
+                            <select name="exposure_canton" class="form-select">
+                                <?php
+                                foreach ($cantones as $canton) {
+                                    echo "<option value=\"$canton[2]\">$canton[2]</option>";
+                                }
+                                ?>
+                            </select></div>
 
                             <div class="mb-3">
-                                <label for="symptom_date" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" name="symptom_date" id="symptom_date"
-                                    aria-describedby="helpId" placeholder="Fecha">
-                            </div>
+                            <label for="exposure_district" class="form-label">Distritos</label>
+                            <select name="exposure_district" class="form-select">
+                                <?php
+                                foreach ($distritos as $distrito) {
+                                    echo "<option value=\"$distrito[2]\">$distrito[2]</option>";
+                                }
+                                ?>
+                            </select></div>
 
                             <button type="submit" class="btn btn-success">Agregar</button>
                             <a name="" id="" class="btn btn-primary" href="./../../index.php" role="button">Cancelar</a>
